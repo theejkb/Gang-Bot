@@ -5,9 +5,11 @@ const { token } = require('./config.json');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-client.commands = new Collection();
 const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+
+client.cooldowns = new Collection();
+client.commands = new Collection();
 
 for (const file of commandFiles) {
 	const filePath = path.join(commandsPath, file);
